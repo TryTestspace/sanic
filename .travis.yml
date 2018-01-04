@@ -39,7 +39,9 @@ script:
       tox -e $TOX_ENV;
     fi
 after_script:
-  - if [[ "${TOX_ENV}" =~ ^py ]] ; then
+  - if [[ "${TOX_ENV}" = "py35" ]] ; then
+      testspace [${TOX_ENV}]testresults.xml{tests} [${TOX_ENV}]coverage.xml;
+    elif [[ "${TOX_ENV}" =~ ^py ]] ; then
       testspace [${TOX_ENV}]testresults.xml{tests};
     fi
 after_success:
