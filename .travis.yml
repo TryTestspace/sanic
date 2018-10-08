@@ -34,13 +34,13 @@ install:
   - pip install codecov
 script: 
   - if [[ "${TOX_ENV}" =~ ^py ]] ; then
-      tox -e $TOX_ENV  -- --junit-xml=testresults.xml --link=codecov;
+      tox -e $TOX_ENV  -- --junit-xml=testresults.xml;
     else
       tox -e $TOX_ENV;
     fi
 after_script:
   - if [[ "${TOX_ENV}" = "py35" ]] ; then
-      testspace [${TOX_ENV}]testresults.xml{tests} [${TOX_ENV}]coverage.xml;
+      testspace [${TOX_ENV}]testresults.xml{tests} --link=codecov;
     elif [[ "${TOX_ENV}" =~ ^py ]] ; then
       testspace [${TOX_ENV}]testresults.xml{tests};
     fi
